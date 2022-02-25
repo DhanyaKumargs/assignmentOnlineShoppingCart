@@ -1,0 +1,209 @@
+
+
+<div  *ngIf="!isEdit" class="container">
+  <div class="row ml-1">
+      <mat-card>
+              <h2>Category: {{loccatagory}}</h2>
+              
+              <button data-toggle="modal" data-target="#myModal1" class="mat-icon-button" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <mat-icon>edit</mat-icon>
+              </button>
+             
+              
+         
+              <button (click)="deleteCategory()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>delete</mat-icon>
+              </button> 
+              
+      </mat-card>
+      <div class="col-md-9 offset-md-2">
+        <button data-toggle="modal" data-target="#myModal" mat-raised-button color="primary" style="float: right;">Add New Product</button>
+    </div>
+  </div>
+ 
+
+  <div class="row">
+      
+      <div class="col-md-offset-0 col-md-11">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Product </th>
+                <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Price &#8377; </th>
+                <td mat-cell *matCellDef="let element"> {{ element.price }} </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="stock">
+                <th mat-header-cell *matHeaderCellDef> Stock </th>
+                <td mat-cell *matCellDef="let element"> {{ element.stock }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="edit">
+                  <th mat-header-cell *matHeaderCellDef> Edit </th>
+                  <td mat-cell *matCellDef="let element"> <button mat-raised-button class="colo" (click)="edititem(element)"><span class="material-icons">edit</span></button> </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef> Delete </th>
+                  <td mat-cell *matCellDef="let element"><button mat-raised-button class="colo"  (click)="deleteItem(element.itemsId,element.name)"><span class="material-icons">delete</span></button>  </td>
+                </ng-container>
+
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+           <div class="ml-5 mt-3">
+              <div class="ml-5">
+              <mat-paginator  [pageSizeOptions]="[5, 10, 20]"
+                          showFirstLastButtons 
+                          aria-label="Select page of periodic elements">
+            </mat-paginator>
+            </div>
+          </div>
+            
+      </div>
+  </div>
+  <br>
+  <!-- <div class="col-md-9 offset-md-2">
+      <button data-toggle="modal" data-target="#myModal" mat-raised-button color="primary" style="float: right;">Add New Product</button>
+  </div> -->
+
+</div>
+
+<!-- ------------pop up category edit-------------------- -->
+<div class="modal fade mt-4" id="myModal1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title" style="color: black;">Edit Category</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="categoryForm">
+          <div class="form-group">
+            <input type="text" class="form-control" id="name" placeholder="Enter a Category Name"
+              formControlName="name">
+          </div>
+          <div class="form-group">
+              <textarea class="form-control" formControlName="description" placeholder="Enter Description" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary" (click)="editCategory()" data-dismiss="modal">Update </button> &nbsp;
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- -------------------add product--------------------------------- -->
+<div class="modal fade mt-4" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header text-dark">
+        <p style="font-size: x-large;" class="text-dark">Add New Product</p>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="itemForm">
+          <div class="form-group">
+            <label class="text-dark align-left">Category:</label>
+            <input type="text" class="form-control" formControlName="category" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{loccatagory}}" [attr.disabled]="true">
+            <!--<small *ngIf="signupformgroup.get('name')?.invalid && signupformgroup.get('name')?.touched" class="text-danger">Invalid Name</small>-->
+          </div>
+          <div class="form-group">
+            <label class="text-dark align-left">Product Name:</label>
+            <input type="email" formControlName="name" class="form-control" id="exampleInputPassword1" placeholder="Product Name">
+             <!--<small *ngIf="fond" class="text-danger">{{msg}}</small>
+            <small *ngIf="signupformgroup.get('email')?.invalid && signupformgroup.get('email')?.touched" class="text-danger">Invalid valid email</small>-->
+          </div>
+          
+          <div class="form-group">
+            <label class="text-dark align-left">Description :</label>
+            <textarea class="form-control" formControlName="description" placeholder="Product Description" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <!--<small *ngIf="signupformgroup.get('mobileNumber')?.invalid && signupformgroup.get('mobileNumber')?.touched" class="text-danger">Phone Number Should Be 10 Digits</small>-->
+          </div>
+          <div class="form-group">
+              <label class="text-dark align-left">Price:</label>
+              <input type="text" class="form-control" formControlName="price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price">
+          <!--<small *ngIf="signupformgroup.get('name')?.invalid && signupformgroup.get('name')?.touched" class="text-danger">Invalid Name</small>-->
+          </div>
+          <div class="form-group">
+              <label class="text-dark align-left">Instock:</label>
+              <input type="text" class="form-control" formControlName="stock" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No. Of Units In Stock">
+      <!--<small *ngIf="signupformgroup.get('name')?.invalid && signupformgroup.get('name')?.touched" class="text-danger">Invalid Name</small>-->
+            </div>
+      
+          
+          <button type="button" [disabled]=""  data-dismiss="modal" class="btn btn-primary" (click)="addProduct()">Add Product</button>&nbsp; &nbsp; 
+          <button type="reset" class="btn btn-danger">Clear</button>
+        </form>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+
+<!-- ----------------Edit item--------------------- -->
+
+<div *ngIf="isEdit"> 
+  <div class="modal-dialog ">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header text-dark">
+        <p style="font-size: x-large;" class="text-dark">Edit  Product</p>
+        <button type="button" (click)="notedit()"class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm">
+          <div class="form-group">
+            <label class="text-dark align-left">Category:</label>
+            <input type="text" class="form-control" formControlName="category" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{loccatagory}}" [attr.disabled]="true">
+            <!--<small *ngIf="signupformgroup.get('name')?.invalid && signupformgroup.get('name')?.touched" class="text-danger">Invalid Name</small>-->
+          </div>
+          <div class="form-group">
+            <label class="text-dark align-left">Product Name:</label>
+            <input type="email" formControlName="name" class="form-control" id="exampleInputPassword1" placeholder="Product Name">
+             <!--<small *ngIf="fond" class="text-danger">{{msg}}</small>
+            <small *ngIf="signupformgroup.get('email')?.invalid && signupformgroup.get('email')?.touched" class="text-danger">Invalid valid email</small>-->
+          </div>
+          
+          <div class="form-group">
+            <label class="text-dark align-left">Description :</label>
+            <textarea class="form-control" formControlName="description" placeholder="Product Description" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <!--<small *ngIf="signupformgroup.get('mobileNumber')?.invalid && signupformgroup.get('mobileNumber')?.touched" class="text-danger">Phone Number Should Be 10 Digits</small>-->
+          </div>
+          <div class="form-group">
+              <label class="text-dark align-left">Price:</label>
+              <input type="text" class="form-control" formControlName="price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price">
+          <!--<small *ngIf="signupformgroup.get('name')?.invalid && signupformgroup.get('name')?.touched" class="text-danger">Invalid Name</small>-->
+          </div>
+          <div class="form-group">
+              <label class="text-dark align-left">Instock:</label>
+              <input type="text" class="form-control" formControlName="stock" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="No. Of Units In Stock">
+      <!--<small *ngIf="signupformgroup.get('name')?.invalid && signupformgroup.get('name')?.touched" class="text-danger">Invalid Name</small>-->
+            </div>
+      
+          
+          <button type="button" [disabled]=""  data-dismiss="modal" class="btn btn-primary" (click)="updateProduct()">Update Product</button>&nbsp; &nbsp; 
+         
+        </form>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>

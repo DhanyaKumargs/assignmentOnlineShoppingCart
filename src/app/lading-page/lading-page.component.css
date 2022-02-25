@@ -1,0 +1,12 @@
+.bg {
+    /* The image used */
+    /* background-image: url("https://thumbs.dreamstime.com/b/brick-wall-cart-paper-shopping-bags-wood-table-background-concept-online-122242461.jpg"); */
+    background-image: url("https://media.istockphoto.com/photos/shopping-cart-trolley-supermarket-on-brick-wall-background-concept-of-picture-id947884656?k=20&m=947884656&s=170667a&w=0&h=-FuOFCogkceQFoXpIp6toahGFsnSfK80BpcqGFvQRII=");
+    /* Full height */
+    height: 91%;
+    width: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

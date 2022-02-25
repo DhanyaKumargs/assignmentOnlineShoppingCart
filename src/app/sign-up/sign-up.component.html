@@ -1,0 +1,87 @@
+<!-------------------------------------------------------Signup Button ------------------------------------------------------------------------------->
+<a  data-toggle="modal" data-target="#myModal" type="button">
+    &nbsp;Sign-up&nbsp;&nbsp;</a>
+
+<!-------------------------------Sign-Up Form--------------------------------------------->   
+<div class="modal fade text-dark text-left mt-4" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">New User Registration</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="clear()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="signupForm">
+      <div class="modal-body mx-3">
+        <div class="md-form mb-2">
+          <i class="fas fa-user prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
+          <input formControlName="name" type="text" id="orangeForm-name" class="form-control validate">
+          <small *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="text-danger">Invalid Name</small>
+        </div>
+        <div class="md-form mb-2">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label>
+          <input formControlName="email" type="email" id="orangeForm-email" class="form-control validate" (change)="getmail($event)">
+          <small *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">Invalid valid email</small>
+          <small *ngIf="fond" class="text-danger">{{msg}}</small>
+        </div>
+
+        <div class="md-form mb-2">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Your password</label>
+          <input formControlName="password" type="password" id="orangeForm-pass" class="form-control validate">
+          <small *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger">Enter the Password</small>
+        </div>
+        <div class="md-form mb-2">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Confirm Your password</label>
+          <input formControlName="confirmpassword" type="password" id="orangeForm-pass" class="form-control validate" (change)="passwordValidator()">
+          <small *ngIf="signupForm.get('confirmpassword')?.invalid && signupForm.get('confirmpassword')?.touched" class="text-danger">Confirm Password</small>
+          <small *ngIf="pwd" class="text-danger">{{msg}}</small>
+        </div>
+        <div class="md-form mb-2">
+          <i class="fas fa-phone prefix grey-text"></i>
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Enter mobil number</label>
+            <input  formControlName="mobil" type="number" id="orangeForm-pass" class="form-control validate">
+            <small *ngIf="signupForm.get('mobil')?.invalid && signupForm.get('mobil')?.touched" class="text-danger">Phone Number Should Be 10 Digits</small>
+          </div>
+          <div class="md-form mb-2">
+            
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Enter date of birth</label>
+            <input formControlName="date" type="date" id="orangeForm-pass" class="form-control validate" >
+            <small *ngIf="signupForm.get('date')?.invalid && signupForm.get('date')?.touched" class="text-danger">Please Enter Date Of Birth</small>
+          </div>
+          <!-- <div class="form-check mb-2">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="optradio">Male &nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+         
+            <label class="form-check-label ml-2">
+              <input type="radio" class="form-check-input" name="optradio">Female 2
+            </label>
+          </div> -->
+          <div class="md-form mb-2 ">
+            <i class="fas fa-user prefix grey-text"></i>
+            <label data-error="wrong" data-success="right" for="orangeForm-name">Billing Address</label>
+            <textarea class="form-control" formControlName="address" placeholder="Enter Address" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <small *ngIf="signupForm.get('address')?.invalid && signupForm.get('address')?.touched" class="text-danger">Enter the Address minimum length is 10</small>
+          </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-start">
+        <button class="btn btn-deep-orange bg-success"  (click)="register()" data-dismiss="modal" >Register</button>
+        <button class="btn btn-deep-orange bg-danger" (click)="clear()" >Clear</button>
+      </div>
+    </form>
+     
+    </div>
+  </div>
+</div>
+
+<!-- 
+----------------------------------------------------- -->
+<!-- [disabled]="signupForm.invalid || fond || pwd" 
+ -->
+<!--   -->

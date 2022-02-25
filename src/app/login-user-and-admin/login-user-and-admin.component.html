@@ -1,0 +1,159 @@
+<a  data-toggle="modal" data-target="#myModal22" type="button">
+    &nbsp;Login&nbsp;&nbsp;</a>
+
+
+<!--Modal: Login / Register Form-->
+<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+      <!--Content-->
+      <div class="modal-content">
+  
+        <!--Modal cascading tabs-->
+        <div class="modal-c-tabs">
+  
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i>
+                Login as Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panel8" role="tab">
+                Login as User</a>
+            </li>
+            <div class="offset-md-5">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+          </ul>
+         
+          <!-- Tab panels -->
+          <div class="tab-content text-dark">
+            <!--Panel 7-->
+            <div class="tab-pane fade in show active justify-content-start" id="panel7" role="tabpanel">
+                <div >
+                    Admin Login
+                </div>
+              <!--Body-->
+              <form [formGroup]="loginForm">
+              <div class="modal-body mx-3 ">
+                <div class="md-form mb-4">
+                  <i class="fas fa-envelope prefix grey-text"></i>
+                  <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                  <input formControlName="email_ID"  type="email" id="defaultForm-email" class="form-control validate" (change)="myFunction()" >
+                 
+                </div>
+          
+                <div class="md-form mb-4 ">
+                  <i class="fas fa-lock prefix grey-text"></i>
+                  <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                  <input formControlName="password"  type="password" id="defaultForm-pass" class="form-control validate ">
+                 
+                </div>
+                <div class="modal-footer d-flex justify-content-center ">
+                    <button class="btn btn-default bg-primary text-white" (click)="loginvalidate()">Submit</button>
+                    <button class="btn btn-default bg-danger text-white" (click)="clear()">Clear</button>
+                   
+                  
+                  </div>
+                  <div *ngIf="!emailpresent" class="text-danger">Email not registered</div>
+                  <div *ngIf="!passwordpresent" class="text-danger">invalid credential</div>
+              </div>
+            </form>
+             
+           
+              
+  
+            </div>
+            <!--/.Panel 7-->
+  
+            <!--Panel 8-->
+            <div class="tab-pane fade" id="panel8" role="tabpanel">
+  
+              <!--Body-->
+              <div >
+                User Login
+            </div>
+         
+          <form [formGroup]="loginForm">
+            <div class="modal-body mx-3 ">
+              <div class="md-form mb-5">
+                <i class="fas fa-envelope prefix grey-text"></i>
+                <label data-error="wrong" data-success="right" for="defaultForm-email" >Your email</label>
+                <input formControlName="email_ID"  type="email" id="defaultForm-email" class="form-control validate " (change)="myuserFunction()">
+               
+              </div>
+        
+              <div class="md-form mb-4 ">
+                <i class="fas fa-lock prefix grey-text"></i>
+                <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                <input formControlName="password"  type="password" id="defaultForm-pass" class="form-control validate ">
+               
+              </div>
+              <div class="modal-footer d-flex justify-content-center ">
+                  <button class="btn btn-default bg-primary text-white" (click)=" userloginvalidate()">Submit</button>
+                  <button class="btn btn-default bg-danger text-white" (click)="clear()">Clear</button>
+                </div>
+                <div *ngIf="!emailpresent" class="text-danger">Email not registered</div>
+                <div *ngIf="!passwordpresent" class="text-danger">invalid credential</div>
+            </div>
+          </form>
+             
+            </div>
+            <!--/.Panel 8-->
+          </div>
+  
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ------------------------------------------ -->
+<div class="modal fade text-dark text-left mt-4" id="myModal22" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold"><i class="fas fa-user mr-1"></i>Log In</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="clear()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="tab-pane fade in show active justify-content-start" id="panel7" role="tabpanel">
+      <form [formGroup]="loginForm">
+        <div class="modal-body mx-3 ">
+          <div class="md-form mb-5">
+            <i class="fas fa-envelope prefix grey-text"></i>
+            <label data-error="wrong" data-success="right" for="defaultForm-email" >Your email</label>
+            <input formControlName="email_ID"  type="email" id="defaultForm-email" class="form-control validate " (change)="myuserFunction()">
+            <small *ngIf="loginForm.get('email_ID')?.invalid && loginForm.get('email_ID')?.touched" class="text-danger">Invalid valid email</small>
+          </div>
+    
+          <div class="md-form mb-4 ">
+            <i class="fas fa-lock prefix grey-text"></i>
+            <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+            <input formControlName="password"  type="password" id="defaultForm-pass" class="form-control validate ">
+           
+          </div>
+          <div class="modal-footer d-flex justify-content-center ">
+              <button class="btn btn-default bg-primary text-white" [disabled]="loginForm.invalid" (click)="commonloginvalidate()">Submit</button>
+              <button class="btn btn-default bg-danger text-white" (click)="clear()">Clear</button>
+          </div>
+            <div *ngIf="!emailpresent" class="text-danger">Email not registered</div>
+            <div *ngIf="!passwordpresent" class="text-danger">invalid credential</div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>

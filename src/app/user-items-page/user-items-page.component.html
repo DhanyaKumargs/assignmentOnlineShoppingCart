@@ -1,0 +1,90 @@
+
+<div class="offset-md-1 mt-3"> 
+    <h1 >Catagory : {{catagory}}</h1>
+ </div>
+<div class="tab">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef> Products </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price &#8377; </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+      <ng-container matColumnDef="inStock">
+        <th mat-header-cell *matHeaderCellDef> Instock </th>
+        <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="action1">
+        <th mat-header-cell *matHeaderCellDef> Add To Cart </th>
+        <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary"  data-toggle="modal" data-target="#my" (click)="addname(element)">
+          <span class="material-icons">add_shopping_cart</span>
+          </button> </td>
+        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     
+    </table>
+   
+    <div class="col-md-8">
+      <div class="mr-5">
+      <mat-paginator  [pageSizeOptions]="[5, 10, 20]"
+                  showFirstLastButtons 
+                  aria-label="Select page of periodic elements">
+    </mat-paginator>
+    </div>
+  </div>
+    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator> -->
+    <div class="col-md-2 mt-3">
+      <img style=" width:100%; height:100%" src="https://media1.giphy.com/media/Phna8ImVFWEqxPUIfk/200w.webp?cid=ecf05e47s728hh7hqy3ho5oluk7myw3xqi5wpsebdq2a6opm&rid=200w.webp&ct=g" />
+    </div>
+  </div>
+  
+  <!-- (click)="addItem(element)" -->
+
+  <div class="modal fade" id="my" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" >
+        <div class="mr-2">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="ml-0"aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <form [formGroup]="catagoryForm"> -->
+        <div class="modal-body mx-3 text-dark ">
+          <div class="md-form mb-3">
+           
+            <label class="h5"data-error="wrong" data-success="right" for="orangeForm-name">ItemName</label>
+            <input type="text" autocomplete="false" formControlName="name" id="defaultForm-email" placeholder="{{itemName}}" class="form-control validate ">
+            <!-- <small *ngIf="catagoryForm.get('name')?.invalid && catagoryForm.get('name')?.touched" class="text-danger">catagory name should min 3 character</small> -->
+          </div>
+    
+          <div class="md-form mb-3">
+            <label>Quantity</label>
+            <div class="row">
+                <div class="col-sm-4">
+                  <input type="tel" autocomplete="false" formControlName="name" id="defaultForm-email" value="{{qty}}" class="form-control validate ">
+                    <!-- <input type="number"  class="form-control col-8 text-center bg-white font-weight-bold " id="counterval" value="{{qty}}"
+                     #Totalcartval> -->
+                </div>
+                <a class="btn btn-primary text-white" (click)="decrement()" role="button">
+                    <i class="fa fa-minus" style="font-size:15px"></i>
+                </a>
+                <div class="col-sm-1"></div>
+                <a class="btn btn-primary text-white" (click)="increment()" role="button">
+                    <i class="fa fa-plus" style="font-size:15px"></i>
+                </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-start ml-3 ">
+          <button class="btn btn-default bg-primary text-white"   data-dismiss="modal" (click)="addItem(element)"  >Add Item to cart</button>
+          
+        </div>
+      <!-- </form> -->
+      </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+
+<div *ngIf="showCheckout" class="offset-md-1  mt-3">
+  <h2>Cart Items</h2>
+</div>
+
+<div *ngIf="showCheckout" class="offset-md-1">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef> Products </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price &#8377; </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+      <ng-container matColumnDef="inStock">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="action1">
+        <th mat-header-cell *matHeaderCellDef> Delete From Cart </th>
+        <td mat-cell *matCellDef="let element let row;let i = index"><button mat-raised-button color="primary" (click)="delete(this.i)">
+          Delete
+          </button> </td>
+        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     
+    </table>
+  </div>
+  <br>
+ 
+  <div *ngIf="showCheckout"class="col-md-9 offset-md-2">
+    <div class="offset-md-1">
+      <div class="ml-5">
+         Total Price: {{totalPrice}} &#8377; 
+      </div>
+    </div>
+    <div class="ml-5">
+    <button data-toggle="modal" data-target="#myModal" mat-raised-button color="success" class="bg-success" style="float: right;" (click)="order()">Check Out</button>
+    <!-- <div class="offset-md-9">
+      <img style="width:25%; height:25%" src="https://media1.giphy.com/media/d3mmdNnW5hkoUxTG/giphy.webp?cid=ecf05e475nbw824vhaz4yrgoahg5u42chrsczxgnjb8h8013&rid=giphy.webp&ct=g">
+    </div> -->
+  </div>
+</div>
+
+
+<div *ngIf="!showCheckout" class="offset-md-3" id="over" style="position:center; ">
+  <!-- <img style="width:50%; height:50%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJeWr1B1PQ0mDSPceax7FKB6ihjHXCi5eNWA&usqp=CAU"> -->
+  <img style=" width:50%; height:50%" src="https://i.imgflip.com/314rnx.jpg">
+  <div class="offset-md-2">
+    <div>
+    <h2 class="text-dark"><span class="ml-3" > No Items In Your Cart</span></h2>
+    </div>
+  <h4 routerLink="../userItems" class="text-primary"><span class="ml-3" > Click here to see products</span></h4>
+</div>
+</div>

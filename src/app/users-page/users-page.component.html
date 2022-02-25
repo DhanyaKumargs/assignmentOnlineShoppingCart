@@ -1,0 +1,128 @@
+<div *ngIf="!flag && showtable" class="col-md-4"> 
+  <div class="ml-5">
+    <div class="ml-3">
+    <h2>Registered users List:</h2><br>
+  </div>
+  </div>
+</div>
+
+  <div *ngIf="!flag && showtable" class="tab">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> Sl.no </th>
+        <td mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="email" >
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+      <ng-container matColumnDef="dob">
+        <th mat-header-cell *matHeaderCellDef> BirthDate </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>PhoneNo</th>
+        <td mat-cell *matCellDef="let element"> {{element.mobil}} </td>
+      </ng-container>
+      
+      
+      <ng-container matColumnDef="action1">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="edit(element.email)" >
+            <mat-icon>edit_note</mat-icon>
+          </button> </td>
+      </ng-container>
+      <ng-container matColumnDef="action2">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="delete(element.email)" >
+            <mat-icon>delete</mat-icon>
+          </button> </td>
+      </ng-container>
+     
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div *ngIf="!flag && showtable" class="mr-5">
+    <div class="mr-3">
+    <mat-paginator  [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons 
+    aria-label="Select page of periodic elements">
+  </mat-paginator>
+  </div>
+  </div>
+<!-- --------------------- -->
+  <div *ngIf="flag" class="example-container">
+    <mat-card class="example-card">
+      <br>
+      <mat-card-header>
+        <mat-card-title>Edit Details</mat-card-title>
+      </mat-card-header>
+      <br>
+      <mat-card-content>
+        <form id="food-form" [formGroup]="editForm">
+          <mat-label >Name</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>person</mat-icon>
+            <input type="text" formControlName="name" matInput placeholder="Placeholder">
+          </mat-form-field>
+          <mat-label>Email</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>contact_mail</mat-icon>
+            <input type="email" formControlName="email" matInput placeholder="Placeholder" readonly="true">
+          </mat-form-field>
+         
+          <mat-label>Password</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>event</mat-icon>
+            <input type="password" formControlName="password" matInput placeholder="Placeholder">
+          </mat-form-field>
+       
+        <div *ngIf="show == true">
+          <mat-label>Confirm Password</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>call</mat-icon>
+            <input type="password" formControlName="confirmpassword" matInput placeholder="Placeholder">
+          </mat-form-field>
+        </div>
+          <mat-label>Mobile Number</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>call</mat-icon>
+            <input type="number" formControlName="mobil" matInput placeholder="Placeholder">
+          </mat-form-field>
+          <mat-label>Date Of Birth</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>call</mat-icon>
+            <input type="text" formControlName="date" matInput placeholder="Placeholder">
+          </mat-form-field>
+          <mat-label>Address</mat-label>
+           <mat-form-field appearance="outline">
+            <mat-icon matPrefix>home</mat-icon>
+            <input type="text" formControlName="address" matInput placeholder="Placeholder">
+          </mat-form-field>
+          <div *ngIf="show == true">
+          <mat-label>Id</mat-label>
+           <mat-form-field appearance="outline">
+            <mat-icon matPrefix></mat-icon>
+            <input type="text" formControlName="id" matInput placeholder="Placeholder">
+          </mat-form-field>
+        </div>
+        <div>
+          <button class="but" (click)="update()">Update</button>&nbsp;
+          <button class="but2" (click)="cancel()">Cancel</button>
+        </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <div *ngIf="!showtable" class="offset-md-5" id="over" style="position:center; width:100%; height:100%">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJeWr1B1PQ0mDSPceax7FKB6ihjHXCi5eNWA&usqp=CAU">
+    <div class="ml-5">
+    <h4 routerLink="" class="text-primary"><span class="mr-3"> Click here to go back home</span></h4>
+  </div>
+  </div>

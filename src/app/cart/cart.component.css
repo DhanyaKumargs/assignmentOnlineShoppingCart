@@ -1,0 +1,89 @@
+table {
+    width: 90%;
+  }
+  th{
+    font-size: 18px;
+    color: black;
+   }
+   td{
+    color: black;
+  }
+   .tab{
+    -align: center;
+    display: flex;
+    justify-content: center;
+   }
+   .mat-row:nth-child(even){
+  
+    background-color:#ffffff;
+  }
+  .mat-row:nth-child(odd){
+    background-color: #dde6e3;
+  }
+  .mat-row:hover > .mat-cell {
+    color:  gray;
+  }
+  th.mat-header-cell {
+    color:black;
+    background-color: white;
+  }
+  button[_ngcontent-nwc-c136] {
+    color:white;
+  }
+  button {
+    background-color: white;
+    border: white;
+  }
+  .example-card {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: black;
+  }
+  .mat-card {
+    background:white;
+    color: black;
+  }
+  ::ng-deep .mat-card-header{
+    background-color:cornflowerblue !important;
+    padding:5px !important;
+    width: 100%;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: burlywood !important;
+    border-radius: 5px;
+  }
+  /* mat-form-field label {
+    font-size: 20px;
+  } */
+  
+  mat-form-field{
+    width: 100%;
+  }
+  .but{
+    background-color: dodgerblue;
+    border: 3px solid cornflowerblue;
+    width: 100px
+  }
+  .mat-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  button:hover{
+    background-color: #68d67a;
+  }
+  
+  h4 span:hover {
+    cursor: pointer;
+}
+

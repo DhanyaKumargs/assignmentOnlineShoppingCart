@@ -1,0 +1,103 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div mat-icon-button class="myapp h3 ml-3 text-center text-white" routerLink='/landing' aria-label="Example icon-button with share icon" type="button">
+        Shopping Cart &nbsp;<i class="fas fa-shopping-cart fa-sm"></i> 
+      </div>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> -->
+        <li class="nav-item dropdown" *ngIf="isLogin">
+          <a class="nav-link dropdown-toggle text-white ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown" >
+            <div class="orderscroll" *ngIf="isAdmin" >
+              <div  *ngFor="let catagory of catagories">
+                <a class="dropdown-item" routerLink="AdminProucts"  (click)="addcat(catagory.name)">{{catagory.name}}</a>
+                
+              </div>
+           
+          </div>
+          <div class="orderscroll" *ngIf="!isAdmin" >
+            <a class="dropdown-item" routerLink="userItems" (click)="addcat('All')">All Items</a>
+            <div *ngFor="let catagory of catagories">
+            <a class="dropdown-item" routerLink="userItems"(click)="addcat(catagory.name)">{{catagory.name}}</a>
+          </div>
+          </div>
+            <!-- <a class="dropdown-item" href="#">Home Decor</a>
+            <a class="dropdown-item" href="#">Computer and Accessories</a>-->
+            <div class="dropdown-divider"></div> 
+            <a *ngIf="isAdmin" class="dropdown-item" data-toggle="modal" data-target="#category">
+              &nbsp;Add New&nbsp;&nbsp;</a>
+           
+          </div>
+        
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link  text-white" routerLink="AdminUsersPage">Users</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAdmin && isLogin">
+          <!-- <a class="nav-link  text-white" routerLink="cart">Cart</a> -->
+        </li>
+      </ul>
+      <div class="offset-md-8 text-center text-white" >
+        <app-sign-up *ngIf="!isLogin"></app-sign-up>
+        <!-- <app-login></app-login> -->
+        <app-login-user-and-admin *ngIf="!isLogin"></app-login-user-and-admin>
+        <span class="text-white mr-5" *ngIf="isLogin" type="button" >Welcome, {{uname}}</span>
+        <span class=" text-white mr-3" *ngIf="!isAdmin && isLogin" type="button" routerLink="cart">Cart</span>
+       <span class="text-white" *ngIf="isLogin" type="button" (click)="logOut()" routerLink="">Log Out</span>
+       
+    </div>
+
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+    </div>
+  </nav>
+ 
+
+
+  <!-- ------------------------------------- -->
+
+
+
+    <div class="modal fade mt-4" id="category" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" >
+            <div class="mr-2">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="ml-0"aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="catagoryForm">
+            <div class="modal-body mx-3 text-dark ">
+              <div class="md-form mb-3">
+                
+                <input type="text" autocomplete="false" formControlName="name" id="defaultForm-email" placeholder="Enter Category Name" class="form-control validate ">
+                <small *ngIf="catagoryForm.get('name')?.invalid && catagoryForm.get('name')?.touched" class="text-danger">catagory name should min 3 character</small>
+              </div>
+        
+              <div class="md-form mb-2 text-dark ">
+              
+                <input type="text" formControlName="description" id="defaultForm-pass" placeholder="Enter a description" class="form-control validate heigh">
+               
+              </div>
+        
+            </div>
+
+            <div class="modal-footer d-flex justify-content-center ">
+              <button class="btn btn-default bg-primary text-white" [disabled]="catagoryForm.invalid" (click)="addCatagory()" data-dismiss="modal" >Add Category</button>
+              <button class="btn btn-default bg-danger text-white" (click)="clear()">Clear</button>
+            </div>
+          </form>
+          </div>
+        </div>
+   </div>

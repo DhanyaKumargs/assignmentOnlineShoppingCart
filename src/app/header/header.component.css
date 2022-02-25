@@ -1,0 +1,32 @@
+.container{
+    height: 750px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    position: relative;
+}
+.bg {
+    /* The image used */
+    background-image: url("https://thumbs.dreamstime.com/b/brick-wall-cart-paper-shopping-bags-wood-table-background-concept-online-122242461.jpg");
+  
+    /* Full height */
+    height: 88%;
+    width: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .heigh{
+    height: 100px;
+}
+
+.orderscroll{
+  overflow-x: hidden;
+  
+  overflow-y: auto;
+  max-height: 90px;
+  min-height: 90px;
+  
+}
